@@ -81,6 +81,13 @@ func (c *Client) AlertRuleGroup(folderUID string, name string) (RuleGroup, error
 	return result, err
 }
 
+func (c *Client) AlertRules() ([]AlertRule, error) {
+	path := "/api/v1/provisioning/alert-rules"
+	var result []AlertRule
+	err := c.request("GET", path, nil, nil, &result)
+	return result, err
+}
+
 // SetAlertRuleGroup overwrites an existing rule group on the server.
 func (c *Client) SetAlertRuleGroup(group RuleGroup) error {
 	syncCalculatedRuleGroupFields(&group)
